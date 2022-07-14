@@ -4,7 +4,6 @@
 !/.projen/deps.json
 !/.projen/files.json
 !/.github/workflows/pull-request-lint.yml
-!/.github/workflows/stale.yml
 !/package.json
 !/LICENSE
 !/.npmignore
@@ -31,12 +30,18 @@ jspm_packages/
 *.tgz
 .yarn-integrity
 .cache
+cdk.context.json
+.eslintec.json
+cdk.json
+package-lock.json
+package.json
+tsconfig.dev.json
+tsconfig.json
+yarn.lock
 !/.projenrc.js
-/test-reports/
-junit.xml
-/coverage/
 !/.github/workflows/build.yml
 !/.mergify.yml
+!/.github/workflows/upgrade.yml
 !/.github/pull_request_template.md
 !/test/
 !/tsconfig.json
@@ -50,4 +55,3 @@ junit.xml
 /cdk.out/
 .cdk.staging/
 .parcel-cache/
-!/.github/workflows/upgrade.yml

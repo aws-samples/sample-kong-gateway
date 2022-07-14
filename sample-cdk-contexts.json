@@ -1,0 +1,12 @@
+{
+    "licese_secret_name": "kong-license-cdk",
+  "adminDns": "admin.anshrma.people.aws.dev",
+  "clusterDns": "cluster.anshrma.people.aws.dev",
+  "telemetryDns": "telemetry.anshrma.people.aws.dev",
+  "managerDns": "manager.anshrma.people.aws.dev",
+  "hostedZoneName": "anshrma.people.aws.dev",
+  "proxyDns": "proxy.anshrma.people.aws.dev",
+  "controlPlaneClusterName": "kong-cp",
+  "dataPlaneClusterName": "kong-dp",
+  "email": "anshrma@amazon.com"
+}
