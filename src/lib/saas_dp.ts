@@ -3,27 +3,28 @@ import { Construct } from 'constructs';
 import * as KongDP from 'kong-data-plane';
 // import * as KongDP from '../../../kong-data-plane';
 
-interface KongDpEksStackProps extends StackProps {
+interface KongSaaSDpEksStackProps extends StackProps {
   vpc: aws_ec2.IVpc;
-  // cluster_dns: String;
-  private_ca_arn: string;
   prometheus_endpoint?:string;
-  licese_secret_name : string;
+  cert_secret_name : string;
+  key_secret_name : string;
   clusterDns : string;
   telemetryDns : string;
   proxyDns : string;
   hostedZoneName : string;
   clusterName : string;
   emailForCertRenewal: string;
-
 }
 
-export class KongDpEks extends Stack {
-  constructor(scope: Construct, id: string, props: KongDpEksStackProps) {
+export class KongSaaSDpEks extends Stack {
+  constructor(scope: Construct, id: string, props: KongSaaSDpEksStackProps) {
     super(scope, id, props);
 
-    new KongDP.KongEks(this, 'KongEksDp', {
-      licenseSecretsName: props.licese_secret_name,
+    new KongDP.KongEks(this, 'KongEksSaaSDp', {
+      mtlsSecrets: {
+        certSecretName: props.cert_secret_name,
+        keySecretName: props.key_secret_name,
+      },
       emailForCertRenewal: props.emailForCertRenewal,
       dataPlaneClusterProps: {
         clusterName: props.clusterName,
@@ -48,8 +49,6 @@ export class KongDpEks extends Stack {
         telemetryDns: props.telemetryDns,
 
       },
-      privateCaArn: props.private_ca_arn,
-
     });
 
     // define resources here...

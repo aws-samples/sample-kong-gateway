@@ -3,6 +3,7 @@ import { ClusterLoggingTypes } from 'aws-cdk-lib/aws-eks';
 import { Construct } from 'constructs';
 // import * as KongCP from 'kong-control-plane';
 import * as KongCP from 'kong-control-plane';
+// import * as KongCP from '../../../kong-control-plane';
 
 // import { ec2 } from 'cdk-nag/lib/rules';
 

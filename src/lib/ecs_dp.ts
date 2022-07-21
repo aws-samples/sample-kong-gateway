@@ -3,6 +3,7 @@ import { aws_ec2, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 // import * as KongDP from 'kong-data-plane';
 import * as KongDP from 'kong-data-plane';
+// import * as KongDP from '../../../kong-data-plane';
 
 interface KongDpEcsStackProps extends StackProps {
   vpc: aws_ec2.IVpc;

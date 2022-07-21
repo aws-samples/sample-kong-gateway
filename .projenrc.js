@@ -10,7 +10,7 @@ const project = new awscdk.AwsCdkTypeScriptApp({
   name: 'sample-kong-app',
   deps: [
     'aws-cdk-lib',
-    'constructs@^10.1.45',
+    'constructs',
     'kong-control-plane@^3.0.0-dev.0',
     'kong-data-plane@^3.0.0-dev.0',
   ],

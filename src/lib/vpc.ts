@@ -1,15 +1,11 @@
-import { Stack, aws_ec2, StackProps } from 'aws-cdk-lib';
+import { Stack, aws_ec2 } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 
-interface VpcStackProps extends StackProps {
-  controlPlaneClusterName ?: string;
-  dataPlaneClusterName ?: string;
-}
 export class Vpc extends Stack {
 
   public vpc : aws_ec2.Vpc;
 
-  constructor(scope: Construct, id: string, props:VpcStackProps ) {
+  constructor(scope: Construct, id: string, props:{} ) {
     super(scope, id, props);
     this.vpc = new aws_ec2.Vpc(this, 'kong-vpc', {
       maxAzs: 2,

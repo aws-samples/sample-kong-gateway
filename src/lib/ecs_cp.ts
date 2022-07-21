@@ -1,7 +1,7 @@
 import { Stack, StackProps, aws_ecs, aws_rds, aws_ec2, RemovalPolicy } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-// import * as KongCP from 'kong-control-plane';
 import * as KongCP from 'kong-control-plane';
+// import * as KongCP from '../../../kong-control-plane';
 
 
 interface KongCpEcsStackProps extends StackProps {
