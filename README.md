@@ -9,8 +9,8 @@ Please let us know if you need more samples by opening an issue here and we woul
 * You would need a Kong Enterprise License Key and save it in AWS Secrets Manager. 
 * You have bootstrapped the AWS Account and Region with AWS CDK. If not, refer [here](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping.html)
 * A Public Hosted Zone under AWS Route53
-* (For Kong Konnect Only) - Save the cluster certificate and certificate key from Kong Konnect and save it in AWS Secrets Manager.
-* (For Kong Konnect Only) - Note the cluster endpoint and telemetry endpoint
+* (For Kong Konnect Only) - Run `./konnect-secrets-manager.sh -v -api https://cloud.konghq.com -u '<KONNECT_USERNAME>' -p '<KONNECT_PASSWORD>' -c '<KONNECT_RUNTIME_SHA>'`.
+* (For Kong Konnect Only) - Note the cluster endpoint and telemetry endpoint from the script output
 
 Update all the values in `cdk.context.json`, sample of all values is as noted under `sample-cdk-contexts.json`
 

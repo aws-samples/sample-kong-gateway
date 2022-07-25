@@ -34,8 +34,8 @@ export class KongSaaSDpEks extends Stack {
         vpc: props.vpc,
       },
       kongTelemetryOptions: {
-        createPrometheusWorkspace: false,
-        prometheusEndpoint: props.prometheus_endpoint,
+        createPrometheusWorkspace: true,
+        // prometheusEndpoint: props.prometheus_endpoint,
       },
       dataPlaneNodeProps: {
         amiType: aws_eks.NodegroupAmiType.AL2_X86_64,
