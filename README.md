@@ -23,7 +23,7 @@ You can pick and choose the desired use case.
 |Control Plane on EKS and AL2 | /lib/eks_cp.ts| `cdk deploy kong-cp-eks`
 |Data Plane on EKS and AL2 | /lib/eks_dp.ts| `cdk deploy kong-dp-eks`
 |Data Plane on EKS and AL2 with Konnect Control Plane| /lib/saas_dp.ts| `cdk deploy konnect-dp-default`
-|Data Plane on ECS and Fargate | /lib/ecs_cp.ts| `cdk deploy kong-cp-ecs`
+|Control Plane on ECS and Fargate | /lib/ecs_cp.ts| `cdk deploy kong-cp-ecs`
 |Data Plane on ECS and Fargate | /lib/ecs_dp.ts| `cdk deploy kong-dp-ecs`
 |Control Plane on EKS and AL2 with DataPlane on ECS and Fargate | /bin/sample-kong-apps.ts| `cdk deploy kong-dp-ecs-with-eks-cp`
 

@@ -363,6 +363,16 @@ cleanup() {
     rm -f ./cluster.key
 }
 
+output() {
+    echo "====================================OUTPUT===================================="
+cat << EOF
+    "cert_secret_name": "$KONNECT_CP_ID-crt",
+    "key_secret_name": "$KONNECT_CP_ID-key",
+    "clusterDns": "${KONNECT_CP_ENDPOINT//https:\//}",
+    "telemetryDns": "${KONNECT_TP_ENDPOINT//https:\//}",
+EOF
+}
+
 main() {
     globals
 
@@ -391,11 +401,7 @@ main() {
 
     # download kong docker image
     #download_kongee_image
-
-    echo "Secrets are stored at $KONNECT_CP_ID-crt and $KONNECT_CP_ID-key"
-    echo "Use Cluster endpoint as $KONNECT_CP_ENDPOINT"
-    echo "Use Telemetry endpoint as $KONNECT_TP_ENDPOINT"
-
+    output
     cleanup
 }
 

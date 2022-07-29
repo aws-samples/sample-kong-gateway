@@ -30,7 +30,7 @@ export class KongSaaSDpEks extends Stack {
         clusterName: props.clusterName,
         version: aws_eks.KubernetesVersion.V1_21,
         defaultCapacity: 0,
-        endpointAccess: aws_eks.EndpointAccess.PUBLIC_AND_PRIVATE,
+        endpointAccess: aws_eks.EndpointAccess.PRIVATE, // DEVONLY
         vpc: props.vpc,
       },
       kongTelemetryOptions: {

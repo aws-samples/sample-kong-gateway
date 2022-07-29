@@ -35,8 +35,8 @@ export class KongCpEcs extends Stack {
           aws_ec2.InstanceSize.LARGE,
         ),
         databaseName: 'kongdb',
-        deletionProtection: false, // DEVONLY
-        removalPolicy: RemovalPolicy.DESTROY, // DEVONLY
+        // deletionProtection: false, // DEVONLY
+        removalPolicy: RemovalPolicy.RETAIN, // DEVONLY
         // port: 1150,
         credentials: {
           username: 'kongadmin',

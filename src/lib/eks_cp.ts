@@ -67,7 +67,7 @@ export class KongCpEks extends Stack {
           clusterName: props.clusterName,
           version: aws_eks.KubernetesVersion.V1_21,
           defaultCapacity: 0,
-          endpointAccess: aws_eks.EndpointAccess.PUBLIC, // DEVONLY
+          endpointAccess: aws_eks.EndpointAccess.PRIVATE, // DEVONLY
           vpc: props.vpc,
           clusterLogging: [
             ClusterLoggingTypes.AUDIT,
@@ -92,8 +92,8 @@ export class KongCpEks extends Stack {
           aws_ec2.InstanceSize.LARGE,
         ),
         databaseName: 'kongdb',
-        deletionProtection: false, // DEVONLY
-        removalPolicy: RemovalPolicy.DESTROY, // DEVONLY
+        // deletionProtection: true, // DEVONLY
+        removalPolicy: RemovalPolicy.RETAIN, // DEVONLY
         // port: 1150,
         credentials: {
           username: 'kongadmin',
