@@ -8,7 +8,7 @@ interface KongDpEksStackProps extends StackProps {
   // cluster_dns: String;
   private_ca_arn: string;
   prometheus_endpoint?:string;
-  licese_secret_name : string;
+  license_secret_name : string;
   clusterDns : string;
   telemetryDns : string;
   proxyDns : string;
@@ -23,7 +23,7 @@ export class KongDpEks extends Stack {
     super(scope, id, props);
 
     new KongDP.KongEks(this, 'KongEksDp', {
-      licenseSecretsName: props.licese_secret_name,
+      licenseSecretsName: props.license_secret_name,
       emailForCertRenewal: props.emailForCertRenewal,
       dataPlaneClusterProps: {
         clusterName: props.clusterName,

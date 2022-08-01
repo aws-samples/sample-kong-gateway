@@ -8,7 +8,7 @@ import * as KongCP from 'kong-control-plane';
 // import { ec2 } from 'cdk-nag/lib/rules';
 
 interface KongCpEksStackProps extends StackProps {
-  licese_secret_name : string;
+  license_secret_name : string;
   vpc: aws_ec2.IVpc;
   adminDns : string;
   clusterDns : string;
@@ -39,7 +39,7 @@ export class KongCpEks extends Stack {
         telemetryDns: props.telemetryDns,
       },
       namespace: 'kong',
-      licenseSecretsName: props.licese_secret_name,
+      licenseSecretsName: props.license_secret_name,
       emailForCertRenewal: props.emailForCertRenewal,
       controlPlaneClusterProps: {
         // DEVONLY
