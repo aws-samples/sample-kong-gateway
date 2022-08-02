@@ -27,6 +27,7 @@ const new_vpc = new Vpc(app, 'kong-vpc', {
   env: devEnv,
 });
 
+
 new KongSaaSDpEks(app, 'konnect-dp-default', {
   env: devEnv,
   emailForCertRenewal: app.node.tryGetContext('konnect').email,
@@ -41,10 +42,12 @@ new KongSaaSDpEks(app, 'konnect-dp-default', {
   clusterName: app.node.tryGetContext('konnect').dataPlaneClusterName,
 });
 
+
+
 const kong_control_plane_eks = new KongCpEks(app, 'kong-cp-eks', {
   env: devEnv,
   emailForCertRenewal: app.node.tryGetContext('self-hosted').email,
-  licese_secret_name: app.node.tryGetContext('self-hosted').licese_secret_name,
+  license_secret_name: app.node.tryGetContext('self-hosted').license_secret_name,
   vpc: new_vpc.vpc,
   adminDns: app.node.tryGetContext('self-hosted').adminDns,
   clusterDns: app.node.tryGetContext('self-hosted').clusterDns,
@@ -54,20 +57,30 @@ const kong_control_plane_eks = new KongCpEks(app, 'kong-cp-eks', {
   clusterName: app.node.tryGetContext('self-hosted').controlPlaneClusterName,
 });
 
+
+
 const kong_control_plane_ecs = new KongCpEcs(app, 'kong-cp-ecs', {
   env: devEnv,
-  licese_secret_name: app.node.tryGetContext('self-hosted').licese_secret_name,
   vpc: new_vpc.vpc,
+  license_secret_name: app.node.tryGetContext('self-hosted').license_secret_name,
+  adminDns: app.node.tryGetContext('self-hosted').adminDns,
+  clusterDns: app.node.tryGetContext('self-hosted').clusterDns,
   hostedZoneName: app.node.tryGetContext('self-hosted').hostedZoneName,
+  managerDns: app.node.tryGetContext('self-hosted').managerDns,
+  telemetryDns: app.node.tryGetContext('self-hosted').telemetryDns,
+  clusterName: app.node.tryGetContext('self-hosted').controlPlaneClusterName,
 });
 
 new KongDpEcs(app, 'kong-dp-ecs-with-eks-cp', {
   env: devEnv,
-  cluster_dns: app.node.tryGetContext('self-hosted').clusterDns,
   vpc: new_vpc.vpc,
-  telemetry_dns: app.node.tryGetContext('self-hosted').telemetryDns,
   private_ca_arn: kong_control_plane_eks.private_ca_arn,
-  licese_secret_name: app.node.tryGetContext('self-hosted').licese_secret_name,
+  clusterDns: app.node.tryGetContext('self-hosted').clusterDns,
+  telemetryDns: app.node.tryGetContext('self-hosted').telemetryDns,
+  hostedZoneName: app.node.tryGetContext('self-hosted').hostedZoneName,
+  proxyDns: app.node.tryGetContext('self-hosted').proxyDns,
+  clusterName: app.node.tryGetContext('self-hosted').dataPlaneClusterName,
+  license_secret_name: app.node.tryGetContext('self-hosted').license_secret_name
 });
 
 
@@ -76,7 +89,7 @@ new KongDpEks(app, 'kong-dp-eks', {
   emailForCertRenewal: app.node.tryGetContext('self-hosted').email,
   vpc: new_vpc.vpc,
   private_ca_arn: kong_control_plane_eks.private_ca_arn,
-  licese_secret_name: app.node.tryGetContext('self-hosted').licese_secret_name,
+  license_secret_name: app.node.tryGetContext('self-hosted').license_secret_name,
   prometheus_endpoint: kong_control_plane_eks.prometheus_endpoint,
   clusterDns: app.node.tryGetContext('self-hosted').clusterDns,
   telemetryDns: app.node.tryGetContext('self-hosted').telemetryDns,
@@ -87,11 +100,14 @@ new KongDpEks(app, 'kong-dp-eks', {
 
 new KongDpEcs(app, 'kong-dp-ecs', {
   env: devEnv,
-  cluster_dns: kong_control_plane_ecs.cluster_dns,
   vpc: new_vpc.vpc,
-  telemetry_dns: kong_control_plane_ecs.telemetry_dns,
   private_ca_arn: kong_control_plane_ecs.private_ca_arn,
-  licese_secret_name: app.node.tryGetContext('self-hosted').licese_secret_name,
+  clusterDns: kong_control_plane_ecs.cluster_dns,
+  telemetryDns:  kong_control_plane_ecs.telemetry_dns,
+  hostedZoneName: app.node.tryGetContext('self-hosted').hostedZoneName,
+  proxyDns: app.node.tryGetContext('self-hosted').proxyDns,
+  clusterName: app.node.tryGetContext('self-hosted').dataPlaneClusterName,
+  license_secret_name: app.node.tryGetContext('self-hosted').license_secret_name,
 });
 
 app.synth();

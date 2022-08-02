@@ -5,9 +5,15 @@ import * as KongCP from 'kong-control-plane';
 
 
 interface KongCpEcsStackProps extends StackProps {
-  licese_secret_name : string;
+  license_secret_name : string;
   vpc: aws_ec2.IVpc;
+  adminDns : string;
+  clusterDns : string;
+  telemetryDns : string;
+  managerDns : string;
   hostedZoneName : string;
+  clusterName: string;
+
 }
 export class KongCpEcs extends Stack {
 
@@ -22,7 +28,7 @@ export class KongCpEcs extends Stack {
     const kong_control_plane = new KongCP.KongEcs(this, 'KongEcsCp', {
 
       clusterProps: {
-        clusterName: 'kong-cp',
+        clusterName: props.clusterName,
         containerInsights: true,
         vpc: props.vpc,
       },
@@ -34,12 +40,12 @@ export class KongCpEcs extends Stack {
           aws_ec2.InstanceClass.M4,
           aws_ec2.InstanceSize.LARGE,
         ),
-        databaseName: 'kongdb',
+        databaseName: 'kong',
         // deletionProtection: false, // DEVONLY
         removalPolicy: RemovalPolicy.RETAIN, // DEVONLY
         // port: 1150,
         credentials: {
-          username: 'kongadmin',
+          username: 'kong',
         },
         vpc: props.vpc,
       },
@@ -67,9 +73,15 @@ export class KongCpEcs extends Stack {
           enabled: true,
         },
       },
-      hostedZoneName: props.hostedZoneName,
+      dnsProps: {
+        adminDns: props.adminDns,
+        managerDns: props.managerDns,
+        hostedZoneName: props.hostedZoneName,
+        telemetryDns: props.telemetryDns,
+        clusterDns: props.clusterDns,
+      },
       internetFacing: true,
-      licenseSecret: props.licese_secret_name,
+      licenseSecret: props.license_secret_name,
       desiredCount: 1,
     });
 
