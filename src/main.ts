@@ -1,4 +1,5 @@
 import { App } from 'aws-cdk-lib';
+import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { KongCpEcs } from './lib/ecs_cp';
 import { KongDpEcs } from './lib/ecs_dp';
 import { KongCpEks } from './lib/eks_cp';
@@ -20,11 +21,20 @@ const devEnv = {
   region: process.env.CDK_DEFAULT_REGION,
 };
 
-
 const app = new App();
 
 const new_vpc = new Vpc(app, 'kong-vpc', {
   env: devEnv,
+});
+
+const konglambdaPluginStatement = new PolicyStatement({
+  resources: [
+    'arn:aws:lambda:'+devEnv.region+':'+devEnv.account+':function:*',
+  ],
+  actions: [
+    'lambda:InvokeFunction',
+  ],
+
 });
 
 
@@ -43,7 +53,6 @@ new KongSaaSDpEks(app, 'konnect-dp-default', {
 });
 
 
-
 const kong_control_plane_eks = new KongCpEks(app, 'kong-cp-eks', {
   env: devEnv,
   emailForCertRenewal: app.node.tryGetContext('self-hosted').email,
@@ -56,8 +65,6 @@ const kong_control_plane_eks = new KongCpEks(app, 'kong-cp-eks', {
   telemetryDns: app.node.tryGetContext('self-hosted').telemetryDns,
   clusterName: app.node.tryGetContext('self-hosted').controlPlaneClusterName,
 });
-
-
 
 const kong_control_plane_ecs = new KongCpEcs(app, 'kong-cp-ecs', {
   env: devEnv,
@@ -80,9 +87,9 @@ new KongDpEcs(app, 'kong-dp-ecs-with-eks-cp', {
   hostedZoneName: app.node.tryGetContext('self-hosted').hostedZoneName,
   proxyDns: app.node.tryGetContext('self-hosted').proxyDns,
   clusterName: app.node.tryGetContext('self-hosted').dataPlaneClusterName,
-  license_secret_name: app.node.tryGetContext('self-hosted').license_secret_name
+  license_secret_name: app.node.tryGetContext('self-hosted').license_secret_name,
+  policyStatements: [konglambdaPluginStatement],
 });
-
 
 new KongDpEks(app, 'kong-dp-eks', {
   env: devEnv,
@@ -103,11 +110,12 @@ new KongDpEcs(app, 'kong-dp-ecs', {
   vpc: new_vpc.vpc,
   private_ca_arn: kong_control_plane_ecs.private_ca_arn,
   clusterDns: kong_control_plane_ecs.cluster_dns,
-  telemetryDns:  kong_control_plane_ecs.telemetry_dns,
+  telemetryDns: kong_control_plane_ecs.telemetry_dns,
   hostedZoneName: app.node.tryGetContext('self-hosted').hostedZoneName,
   proxyDns: app.node.tryGetContext('self-hosted').proxyDns,
   clusterName: app.node.tryGetContext('self-hosted').dataPlaneClusterName,
   license_secret_name: app.node.tryGetContext('self-hosted').license_secret_name,
+  policyStatements: [konglambdaPluginStatement],
 });
 
 app.synth();

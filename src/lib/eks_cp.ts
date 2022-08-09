@@ -1,9 +1,8 @@
 import { Stack, StackProps, aws_eks, aws_rds, aws_ec2, RemovalPolicy } from 'aws-cdk-lib';
 import { ClusterLoggingTypes } from 'aws-cdk-lib/aws-eks';
 import { Construct } from 'constructs';
-// import * as KongCP from 'kong-control-plane';
 import * as KongCP from 'kong-control-plane';
-// import * as KongCP from '../../../kong-control-plane';
+//import * as KongCP from '../../../kong-control-plane';
 
 // import { ec2 } from 'cdk-nag/lib/rules';
 
