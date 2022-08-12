@@ -1,4 +1,4 @@
-import { Stack, StackProps, aws_eks, aws_ec2 } from 'aws-cdk-lib';
+import { Stack, StackProps, aws_eks, aws_ec2, aws_iam } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as KongDP from 'kong-data-plane';
 //import * as KongDP from '../../../kong-data-plane';
@@ -14,6 +14,7 @@ interface KongSaaSDpEksStackProps extends StackProps {
   hostedZoneName : string;
   clusterName : string;
   emailForCertRenewal: string;
+  policyStatements: aws_iam.PolicyStatement[];
 }
 
 export class KongSaaSDpEks extends Stack {

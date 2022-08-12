@@ -67,4 +67,8 @@ The VPC in which Kong data plane is deployed has the connectivity (and DNS resol
 
 ## What this app sets up ?
 
-FILLME
+Point to APG Pattern
+
+## License Summary
+
+This sample code is made available under the MIT-0 license. See the LICENSE file. See the LEGAL file for disclaimers.

@@ -50,6 +50,7 @@ new KongSaaSDpEks(app, 'konnect-dp-default', {
   hostedZoneName: app.node.tryGetContext('konnect').hostedZoneName,
   proxyDns: app.node.tryGetContext('konnect').proxyDns,
   clusterName: app.node.tryGetContext('konnect').dataPlaneClusterName,
+  policyStatements: [konglambdaPluginStatement],
 });
 
 
@@ -103,6 +104,7 @@ new KongDpEks(app, 'kong-dp-eks', {
   hostedZoneName: app.node.tryGetContext('self-hosted').hostedZoneName,
   proxyDns: app.node.tryGetContext('self-hosted').proxyDns,
   clusterName: app.node.tryGetContext('self-hosted').dataPlaneClusterName,
+  policyStatements: [konglambdaPluginStatement],
 });
 
 new KongDpEcs(app, 'kong-dp-ecs', {
