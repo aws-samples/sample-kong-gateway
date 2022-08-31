@@ -1,16 +1,16 @@
 {
   "konnect":{
-    "cert_secret_name": "<OUTPUT FROM konnect-secrets-manager.sh>",
-    "key_secret_name": "<OUTPUT FROM konnect-secrets-manager.sh>",
-    "clusterDns": "<OUTPUT FROM konnect-secrets-manager.sh>",
-    "telemetryDns": "<OUTPUT FROM konnect-secrets-manager.sh>",
-    "hostedZoneName": "example.com",
-    "proxyDns": "example.com",
+    "cert_secret_name": "e9205a44-01f4-46b7-b2f4-5c34679c2cc1-crt",
+    "key_secret_name": "e9205a44-01f4-46b7-b2f4-5c34679c2cc1-key",
+    "clusterDns": "6fae8e8f10.us.cp0.konghq.com",
+    "telemetryDns": "6fae8e8f10.us.tp0.konghq.com",
+    "hostedZoneName": "anshrma.people.aws.dev",
+    "proxyDns": "proxy.anshrma.people.aws.dev",
     "dataPlaneClusterName": "kong-dp",
-    "email": "admin@example.com"
+    "email": "anshrma@amazon.com"
   },
   "self-hosted":{
-    "licese_secret_name": "kong-license-cdk",
+    "license_secret_name": "kong-license-cdk",
     "clusterDns": "cluster.example.com",
     "telemetryDns": "telemetry.example.com",
     "hostedZoneName": "example.com",
