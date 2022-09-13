@@ -14,6 +14,7 @@ interface KongDpEcsStackProps extends StackProps {
   license_secret_name : string;
   clusterName: string;
   policyStatements: PolicyStatement[];
+  loadBalancerCertificatesArn?: string;
 };
 
 export class KongDpEcs extends Stack {
@@ -45,6 +46,7 @@ export class KongDpEcs extends Stack {
       },
       licenseSecret: props.license_secret_name,
       policyStatements: props.policyStatements,
-    });
+      loadBalancerCertificatesArn: props.loadBalancerCertificatesArn
+  });
   }
 }

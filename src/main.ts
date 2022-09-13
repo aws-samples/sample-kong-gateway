@@ -118,6 +118,7 @@ new KongDpEcs(app, 'kong-dp-ecs', {
   clusterName: app.node.tryGetContext('self-hosted').dataPlaneClusterName,
   license_secret_name: app.node.tryGetContext('self-hosted').license_secret_name,
   policyStatements: [konglambdaPluginStatement],
+  loadBalancerCertificatesArn: app.node.tryGetContext('self-hosted').loadBalancerCertificatesArn
 });
 
 app.synth();
