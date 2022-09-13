@@ -65,10 +65,6 @@ The VPC in which Kong data plane is deployed has the connectivity (and DNS resol
 * ADOT Operator does not supports ARM64 architecture
 * EKS Fargate as some of the technology used like Secrets Management runs are DaemonSet, which is not supported in Fargate.
 
-## What this app sets up ?
-
-Point to APG Pattern
-
 ## License Summary
 
 This sample code is made available under the MIT-0 license. See the LICENSE file. See the LEGAL file for disclaimers.
