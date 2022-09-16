@@ -1,7 +1,7 @@
 import { Stack, StackProps, aws_eks, aws_ec2, aws_iam } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as KongDP from 'kong-data-plane';
-//import * as KongDP from '../../../kong-data-plane';
+// import * as KongDP from '../../../kong-data-plane';
 
 interface KongSaaSDpEksStackProps extends StackProps {
   vpc: aws_ec2.IVpc;
@@ -26,6 +26,7 @@ export class KongSaaSDpEks extends Stack {
         certSecretName: props.cert_secret_name,
         keySecretName: props.key_secret_name,
       },
+      policyStatements: props.policyStatements,
       emailForCertRenewal: props.emailForCertRenewal,
       dataPlaneClusterProps: {
         clusterName: props.clusterName,

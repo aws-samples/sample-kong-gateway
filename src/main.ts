@@ -7,15 +7,6 @@ import { KongDpEks } from './lib/eks_dp';
 import { KongSaaSDpEks } from './lib/saas_dp';
 import { Vpc } from './lib/vpc';
 
-// export class MyStack extends Stack {
-//   constructor(scope: Construct, id: string, props: StackProps = {}) {
-//     super(scope, id, props);
-
-//     // define resources here...
-//   }
-// }
-
-// for development, use account/region from cdk cli
 const devEnv = {
   account: process.env.CDK_DEFAULT_ACCOUNT,
   region: process.env.CDK_DEFAULT_REGION,
@@ -37,21 +28,22 @@ const konglambdaPluginStatement = new PolicyStatement({
 
 });
 
-
-new KongSaaSDpEks(app, 'konnect-dp-default', {
-  env: devEnv,
-  emailForCertRenewal: app.node.tryGetContext('konnect').email,
-  vpc: new_vpc.vpc,
-  cert_secret_name: app.node.tryGetContext('konnect').cert_secret_name,
-  key_secret_name: app.node.tryGetContext('konnect').key_secret_name,
-  // prometheus_endpoint: kong_control_plane_eks.prometheus_endpoint,
-  clusterDns: app.node.tryGetContext('konnect').clusterDns,
-  telemetryDns: app.node.tryGetContext('konnect').telemetryDns,
-  hostedZoneName: app.node.tryGetContext('konnect').hostedZoneName,
-  proxyDns: app.node.tryGetContext('konnect').proxyDns,
-  clusterName: app.node.tryGetContext('konnect').dataPlaneClusterName,
-  policyStatements: [konglambdaPluginStatement],
-});
+if (app.node.tryGetContext('konnect')) {
+  new KongSaaSDpEks(app, 'konnect-dp-default', {
+    env: devEnv,
+    emailForCertRenewal: app.node.tryGetContext('konnect').email,
+    vpc: new_vpc.vpc,
+    cert_secret_name: app.node.tryGetContext('konnect').cert_secret_name,
+    key_secret_name: app.node.tryGetContext('konnect').key_secret_name,
+    // prometheus_endpoint: kong_control_plane_eks.prometheus_endpoint,
+    clusterDns: app.node.tryGetContext('konnect').clusterDns,
+    telemetryDns: app.node.tryGetContext('konnect').telemetryDns,
+    hostedZoneName: app.node.tryGetContext('konnect').hostedZoneName,
+    proxyDns: app.node.tryGetContext('konnect').proxyDns,
+    clusterName: app.node.tryGetContext('konnect').dataPlaneClusterName,
+    policyStatements: [konglambdaPluginStatement],
+  });
+};
 
 
 const kong_control_plane_eks = new KongCpEks(app, 'kong-cp-eks', {

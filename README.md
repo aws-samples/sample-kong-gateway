@@ -64,6 +64,7 @@ The VPC in which Kong data plane is deployed has the connectivity (and DNS resol
 
 * ADOT Operator does not supports ARM64 architecture
 * EKS Fargate as some of the technology used like Secrets Management runs are DaemonSet, which is not supported in Fargate.
+* IRSA does not works for Kong [Lambda Plugin](https://docs.konghq.com/hub/kong-inc/aws-lambda/) , pending implementation of [feature request](https://github.com/Kong/kong/pull/8732). As a workaround, starting Kong Gateway 3.0 onwards, you may grant your EKS nodes access to assume a specific role, which has access to invoke the lambda function and define `aws_assume_role_arn` in Lambda Plugin configuration
 
 ## License Summary
 

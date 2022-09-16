@@ -1,7 +1,7 @@
 import { Stack, StackProps, aws_eks, aws_ec2, aws_iam } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as KongDP from 'kong-data-plane';
-//import * as KongDP from '../../../kong-data-plane';
+// import * as KongDP from '../../../kong-data-plane';
 
 interface KongDpEksStackProps extends StackProps {
   vpc: aws_ec2.IVpc;
@@ -24,12 +24,14 @@ export class KongDpEks extends Stack {
 
     new KongDP.KongEks(this, 'KongEksDp', {
       licenseSecretsName: props.license_secret_name,
+      policyStatements: props.policyStatements,
       emailForCertRenewal: props.emailForCertRenewal,
       dataPlaneClusterProps: {
         clusterName: props.clusterName,
-        version: aws_eks.KubernetesVersion.V1_21,
+        version: aws_eks.KubernetesVersion.of('1.22'),
         defaultCapacity: 0,
-        endpointAccess: aws_eks.EndpointAccess.PRIVATE, // DEVONLY,
+        // endpointAccess: aws_eks.EndpointAccess.PUBLIC_AND_PRIVATE, // DEVONLY,
+        endpointAccess: aws_eks.EndpointAccess.PRIVATE,
         vpc: props.vpc,
       },
       kongTelemetryOptions: {
